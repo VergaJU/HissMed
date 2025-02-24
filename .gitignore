@@ -152,4 +152,5 @@ cython_debug/
 .idea/
 
 # Cheshire Cat Plugin settings
-settings.json
+data/
+
