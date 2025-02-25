@@ -1,31 +1,32 @@
 from cat.mad_hatter.decorators import tool, hook, plugin
-from pydantic import BaseModel
 from datetime import datetime, date
+from cat.looking_glass.stray_cat import StrayCat
+from cat.log import log
+import os
+import sys
 
-class MySettings(BaseModel):
-    required_int: int
-    optional_int: int = 69
-    required_str: str
-    optional_str: str = "meow"
-    required_date: date
-    optional_date: date = 1679616000
+sys.path.append(os.path.join(os.path.dirname(__file__)))
 
-@plugin
+from HissMed.retrieve_articles import PapersDownloader
+
+
 def settings_model():
-    return MySettings
+    settings = cat.mad_hatter.get_plugin().load_settings()
+    return settings
+
 
 @tool
-def get_the_day(tool_input, cat):
-    """Get the day of the week. Input is always None."""
-
-    dt = datetime.now()
-
-    return dt.strftime('%A')
-
-@hook
-def before_cat_sends_message(message, cat):
-
-    prompt = f'Rephrase the following sentence in a grumpy way: {message["content"]}'
-    message["content"] = cat.llm(prompt)
-
-    return message
+def hisscat_download_literature(user_message, cat):
+    """ run this tool whenever the message starts with HissMed search"""
+    # user_message = StrayCat.working_memory.user_message_json.text
+    log.debug(f"User message received: {user_message}")  # Log the user message
+    # Check if the input matches the 'HissMed search: <query>' format
+    if user_message.startswith("HissMed search: "):
+        settings = settings_model()
+        PapersDownloader.set_email(email=settings['email'])
+        # Extract the query
+        query = user_message[len("HissMed search: "):]
+        # Print the query
+        log.debug(f"Query received: {query}")
+        PapersDownloader.run(query)
+    return user_message

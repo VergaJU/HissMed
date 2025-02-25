@@ -1,4 +1,5 @@
-from pydantic import BaseModel, Field, field_validator
+from pydantic import BaseModel, field_validator
+from cat.mad_hatter.decorators import plugin
 
 class MySettings(BaseModel):
     email: str = "your.email@mail.com"
@@ -7,11 +8,11 @@ class MySettings(BaseModel):
     @field_validator("email")
     @classmethod
     def email_validator(cls, email):
-        if "@" not in value:
+        if "@" not in email:
             raise ValueError("Invalid email address")
-        elif "your.email@mail.com" == value:
+        elif "your.email@mail.com" == email:
             raise ValueError("Please set your email address")
 
-#@plugin
+@plugin
 def settings_model():
     return MySettings

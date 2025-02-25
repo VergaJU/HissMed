@@ -87,14 +87,21 @@ class PapersDownloader:
             cls.download_pdfs(pmc_ids)
 
     @classmethod
-    def run(cls, query, email):
+    def run(cls, query):
+        if Entrez.email is None:
+            raise ValueError("Please set your email address")
         cls.create_directory()
-        Entrez.email = email
         cls.batch_download_pdfs(query)
 
+    @classmethod
+    def set_email(cls, email):
+        if email == 'your.email@mail.com':
+            raise ValueError("Please set your email address")
+        Entrez.email = email
 
 if __name__ == "__main__":
     args = PapersDownloader.get_args()
     query = args.query or '(Multiple Myeloma[Title]) AND ("2021/01/01"[Publication Date] : "2021/01/10"[Publication Date])'
     email = args.email or "your.email@example.com"
-    PapersDownloader.run(query, email)
+    PapersDownloader.set_email(email)
+    PapersDownloader.run(query)
