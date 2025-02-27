@@ -6,7 +6,7 @@ from Bio import Entrez
 
 class PapersDownloader:
     headers = {"User-Agent": "Mozilla/5.0"}
-    output_folder = "data"
+    output_folder = "./literature"
     sleep_time = .5
 
     @classmethod

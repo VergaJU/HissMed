@@ -9,24 +9,16 @@ sys.path.append(os.path.join(os.path.dirname(__file__)))
 
 from HissMed.retrieve_articles import PapersDownloader
 
-
-def settings_model():
-    settings = cat.mad_hatter.get_plugin().load_settings()
-    return settings
-
-
 @tool
 def hisscat_download_literature(user_message, cat):
-    """ run this tool whenever the message starts with HissMed search"""
-    # user_message = StrayCat.working_memory.user_message_json.text
-    log.debug(f"User message received: {user_message}")  # Log the user message
-    # Check if the input matches the 'HissMed search: <query>' format
-    if user_message.startswith("HissMed search: "):
-        settings = settings_model()
-        PapersDownloader.set_email(email=settings['email'])
-        # Extract the query
-        query = user_message[len("HissMed search: "):]
-        # Print the query
-        log.debug(f"Query received: {query}")
-        PapersDownloader.run(query)
+    """ run this tools whenever message starts with HissMed search"""
+    log.info(f"User is searching for: {user_message}")  # Log the user message
+    log.info(f"Action input: {action_input}") # Log the action input
+    settings = cat.mad_hatter.get_plugin().load_settings()
+    log.info(f"User email: {settings['email']}")  # Log the user email
+    PapersDownloader.set_email(email=settings['email'])
+    log.info(f"Saving articles in {os.path.join(os.getcwd(),'literature')}")  # Log the output folder
+    PapersDownloader.run(user_message) # Download the articles
+    log.info(f"Downloaded articles") # Log the download status
     return user_message
+
