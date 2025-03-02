@@ -1,4 +1,8 @@
 {
     "email": "your.email@mail.com",
-    "top_references": 5
+    "top_references": 5,
+    "top_n_articles": 10,
+    "citation_weight": 0.7,
+    "year_weight": 0.5,
+    "journal_weight": 0.9
 }
