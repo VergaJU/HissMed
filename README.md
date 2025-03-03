@@ -8,3 +8,10 @@ A research assistant that helps you retrieve information from [Pubmed Central](h
 ## Usage
 
 Soon
+
+
+
+
+## Contributions
+
+The method to obtain the number of citations and rank the papers is heavily inspired by the work of [Karen Guerrero Vazquez](https://github.com/GuerreroVazquez) and her tool [PaperMiner](https://github.com/GuerreroVazquez/Muscle_wasting/tree/master/paper_mining)
