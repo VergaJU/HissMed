@@ -1,6 +1,6 @@
 {
     "name": "HissMed Literature Assistant",
-    "version": "0.0.1",
+    "version": "0.1.0",
     "description": "HissMed literature assistant, fetch your queries on PubMed central and gives you answers and references.",
     "author_name": "Jacopo Umberto Verga",
     "plugin_url": "https://github.com/VergaJU/HissMed",

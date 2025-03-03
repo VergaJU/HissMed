@@ -153,4 +153,5 @@ cython_debug/
 
 # Cheshire Cat Plugin settings
 data/
-
+literature/
+hissmed/

@@ -16,9 +16,16 @@ def hisscat_download_literature(user_message, cat):
     log.info(f"Action input: {action_input}") # Log the action input
     settings = cat.mad_hatter.get_plugin().load_settings()
     log.info(f"User email: {settings['email']}")  # Log the user email
-    PapersDownloader.set_email(email=settings['email'])
+    email = settings['email']
+    top_n_articles = settings['top_n_articles']
+    top_references = settings['top_references']
+    citation_weight = settings['citation_weight']
+    year_weight = settings['year_weight']
+    journal_weight = settings['journal_weight']
+    PapersDownloader.set_email(email=email)
     log.info(f"Saving articles in {os.path.join(os.getcwd(),'literature')}")  # Log the output folder
-    PapersDownloader.run(user_message) # Download the articles
+    PapersDownloader.create_directory()
+    PapersDownloader.batch_download_pdfs(query=query, top_n_articles=top_n_articles, citation_w=citation_weight, year_w=year_weight, journal_w=journal_weight)
     log.info(f"Downloaded articles") # Log the download status
     return user_message
 

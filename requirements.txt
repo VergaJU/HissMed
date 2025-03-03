@@ -1,1 +1,4 @@
 biopython>=1.85
+pandas
+numpy
+xml
