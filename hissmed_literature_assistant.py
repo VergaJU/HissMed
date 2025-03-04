@@ -13,12 +13,11 @@ from HissMed.retrieve_articles import PapersDownloader
 def hisscat_download_literature(user_message, cat):
     """ run this tools whenever message starts with HissMed search"""
     log.info(f"User is searching for: {user_message}")  # Log the user message
-    log.info(f"Action input: {action_input}") # Log the action input
     settings = cat.mad_hatter.get_plugin().load_settings()
     log.info(f"User email: {settings['email']}")  # Log the user email
     email = settings['email']
     top_n_articles = settings['top_n_articles']
-    top_references = settings['top_references']
+    top_references = settings['top_references'] # not used now
     citation_weight = settings['citation_weight']
     year_weight = settings['year_weight']
     journal_weight = settings['journal_weight']
