@@ -172,7 +172,7 @@ class PapersDownloader:
 
     
     @staticmethod
-    def rank_articles(metrics:Dict,journal_w=0.9,year_w=0.5,citation_w=0.7)->pd.DataFrame:
+    def rank_articles(metrics:Dict,journal_w=0.9,year_w=0.5,citation_w=0.7,**kwargs)->pd.DataFrame:
         """
         Rank articles based on journal ranking, publication year, and number of citations.
         
@@ -275,7 +275,7 @@ class PapersDownloader:
         Returns:
             None
         """
-        top_n_articles=cls.get_top_n_articles(query=query, n_top_articles=10, db=db,**kwargs)
+        top_n_articles=cls.get_top_n_articles(query=query, db=db,**kwargs)
         print(f"{datetime.now()} - Downloading top {top_n_articles.shape[0]} articles...")
         if top_n_articles.shape[0] == 0:
             return
