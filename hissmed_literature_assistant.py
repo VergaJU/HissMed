@@ -24,7 +24,7 @@ def hisscat_download_literature(user_message, cat):
     PapersDownloader.set_email(email=email)
     log.info(f"Saving articles in {os.path.join(os.getcwd(),'literature')}")  # Log the output folder
     PapersDownloader.create_directory()
-    PapersDownloader.batch_download_pdfs(query=query, top_n_articles=top_n_articles, citation_w=citation_weight, year_w=year_weight, journal_w=journal_weight)
+    PapersDownloader.batch_download_pdfs(query=user_message, top_n_articles=top_n_articles, citation_w=citation_weight, year_w=year_weight, journal_w=journal_weight)
     log.info(f"Downloaded articles") # Log the download status
     return user_message
 
